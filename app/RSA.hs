@@ -4,18 +4,17 @@ import System.Random
 
 -- Funcion que da los primeros n primos 
 -- con el metodo de Eratosthenes.
-primos:: Int -> [Int]
+primos:: Integer -> [Integer]
 primos n = sieve [2..n] where
     -- Agregamos todos los numeros que no sean multiplos de un primo
     sieve [] = []
     sieve (x:xs) = x : sieve (filter (\y -> y `mod` x /= 0) xs) 
 
 -- Funcion para obtener dos elementos aleatorios y diferentes de una lista
-tuplaAleatorios :: [Int] -> StdGen -> (Int, Int, StdGen)
-tuplaAleatorios lista gen = (elemento1, elemento2, gen2)
-  where
+elementoAleatorio :: [Integer] -> StdGen -> (Integer, [Integer], StdGen)
+elementoAleatorio lista gen = (elemento, actualizada, gen1) where
     n = length lista
-    (i, gen1) = randomR (0, n-1) gen -- Obtenemos el índice aleatorio 1
-    (j, gen2) = randomR (0, n-2) gen1 -- Obtenemos el índice aleatorio 2 (distinto del primero)
-    elemento1 = lista !! i
-    elemento2 = if j >= i then lista !! (j+1) else lista !! j
+    (i, gen1) = randomR (0, n-1) gen         -- Indice aleaotorio
+    elemento = lista !! i                    -- Elemento en el indice aleatorio
+    actualizada = filter (/= elemento) lista -- Lista sin el elemento tomado
+

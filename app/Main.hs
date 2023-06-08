@@ -1,7 +1,7 @@
 import System.Environment
 import System.IO
 import RSA
-
+import System.Random
 
 -- FUNCION PRINCIPAL
 main :: IO ()
